@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "49442338167",
+    "project_id": "kayaksystem-f14d1",
+    "storage_bucket": "kayaksystem-f14d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:49442338167:android:71e78780647d44ab979d72",
+        "android_client_info": {
+          "package_name": "com.example.kayak"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTTgMsDV4UZWa94l2X1TD7GXdvF9k6qWA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
