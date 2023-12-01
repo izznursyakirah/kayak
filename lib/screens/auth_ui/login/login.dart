@@ -1,7 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kayak/constants/constants.dart';
 import 'package:kayak/constants/routes.dart';
+import 'package:kayak/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
 import 'package:kayak/screens/auth_ui/sign_up/sign_up.dart';
+import 'package:kayak/screens/home/home.dart';
 import 'package:kayak/widgets/primary_button/primary_button.dart';
 import 'package:kayak/widgets/top_titles/top_titles.dart';
 
@@ -13,6 +18,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
   bool isShowPassword = true;
   @override
   Widget build(BuildContext context) {
@@ -65,7 +72,17 @@ class _LoginState extends State<Login> {
             ),
             PrimaryButton(
               title: "Login",
-              onPressed: () {},
+              onPressed: () async {
+                bool isVaildated = loginValidation(email.text, password.text);
+                if (isVaildated) {
+                  bool isLogined = await FirebaseAuthHelper.instance
+                      .login(email.text, password.text, context);
+                  if (isLogined) {
+                    Routes.instance.pushAndRemoveUntil(
+                      widget: const Home(), context: context);
+                  }
+                }
+              },
             ),
             const SizedBox(
               height: 24.0,
