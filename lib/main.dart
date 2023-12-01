@@ -1,11 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:kayak/firebase_helper/firebase_options/firebase_options.dart';
 import 'package:kayak/constants/theme.dart';
 import 'package:kayak/screens/auth_ui/welcome/welcome.dart';
 
 void main() async {
    WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseConfig.plaftformOptions,
+    );
 
   runApp(const MyApp());
 }

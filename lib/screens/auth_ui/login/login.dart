@@ -24,7 +24,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,6 +36,7 @@ class _LoginState extends State<Login> {
               height: 46.0,
             ),
             TextFormField(
+              controller: email,
               decoration: const InputDecoration(
                 hintText: "Email",
                 prefixIcon: Icon(
@@ -47,6 +48,7 @@ class _LoginState extends State<Login> {
               height: 12.0,
             ),
             TextFormField(
+              controller: password,
               obscureText: isShowPassword,
               decoration: InputDecoration(
                 hintText: "Password",

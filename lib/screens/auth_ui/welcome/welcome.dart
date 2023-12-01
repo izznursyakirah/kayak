@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kayak/constants/asset_images.dart';
 import 'package:kayak/constants/routes.dart';
 import 'package:kayak/screens/auth_ui/login/login.dart';
+import 'package:kayak/screens/auth_ui/sign_up/sign_up.dart';
 import 'package:kayak/widgets/primary_button/primary_button.dart';
 import 'package:kayak/widgets/top_titles/top_titles.dart';
 
@@ -36,7 +37,9 @@ class Welcome extends StatelessWidget {
           ),
           PrimaryButton(
             title: "Sign Up",
-            onPressed: () {},
+            onPressed: () {
+               Routes.instance.push(widget: SignUp(), context: context);
+            },
           ),
         ],
       ),
