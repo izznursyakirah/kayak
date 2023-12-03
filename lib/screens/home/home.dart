@@ -13,18 +13,25 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<CategoryModel> categoriesList = [];
-
   bool isLoading = false;
+
   @override
   void initState() {
     super.initState();
+    getCategoryList();
   }
 
-  void getCategoryList() async {
+  Future<void> getCategoryList() async {
     setState(() {
       isLoading = true;
     });
-    categoriesList = await FirebaseFirestoreHelper.instance.getCategories();
+
+    try {
+      categoriesList = await FirebaseFirestoreHelper.instance.getCategories();
+    } catch (error) {
+      print("Error fetching categories: $error");
+    }
+
     setState(() {
       isLoading = false;
     });
@@ -33,142 +40,144 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:isLoading?Center(child: Container(
-        height:100,
-        width: 100,
-        alignment: Alignment.center,
-        child: CircularProgressIndicator(),
-        ),
-        ) 
-        :SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(12.0),
+      body: isLoading
+          ? Center(
+              child: Container(
+                height: 100,
+                width: 100,
+                alignment: Alignment.center,
+                child: CircularProgressIndicator(),
+              ),
+            )
+          : SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const TopTitles(subtitle: "", title: "Kayak Booking"),
-                  TextFormField(
-                    decoration:
-                        const InputDecoration(hintText: "Search........."),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const TopTitles(subtitle: "", title: "Kayak Booking"),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                              hintText: "Search........."),
+                        ),
+                        const SizedBox(
+                          height: 24.0,
+                        ),
+                        const Text(
+                          "Categories",
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: categoriesList
+                          .map(
+                            (e) => Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Card(
+                                color: Colors.white,
+                                elevation: 6.0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                                child: SizedBox(
+                                  height: 100,
+                                  width: 100,
+                                  child: Image.network(e.image),
+                                ),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                    ),
                   ),
                   const SizedBox(
-                    height: 24.0,
+                    height: 12.0,
                   ),
-                  const Text(
-                    "Categories",
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
+                  const Padding(
+                    padding: EdgeInsets.only(top: 12.0, left: 12.0),
+                    child: Text(
+                      "List of Kayak",
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
+                  ),
+                  const SizedBox(
+                    height: 12.0,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: GridView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        primary: false,
+                        itemCount: bestProducts.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                mainAxisSpacing: 20,
+                                crossAxisSpacing: 20,
+                                childAspectRatio: 0.9,
+                                crossAxisCount: 2),
+                        itemBuilder: (ctx, index) {
+                          ProductModel singleProduct = bestProducts[index];
+                          return Container(
+                            decoration: BoxDecoration(
+                              color: Colors.blueGrey.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Column(
+                              children: [
+                                Image.network(
+                                  singleProduct.image,
+                                  height: 60,
+                                  width: 60,
+                                ),
+                                const SizedBox(
+                                  height: 12.0,
+                                ),
+                                Text(
+                                  singleProduct.name,
+                                  style: const TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text("Price: RM${singleProduct.price}"),
+                                const SizedBox(
+                                  height: 30.0,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                  width: 140,
+                                  child: OutlinedButton(
+                                    onPressed: () {},
+                                    child: const Text(
+                                      "BOOK",
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }),
                   ),
                 ],
               ),
             ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: categoriesList
-                    .map(
-                      (e) => Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: Card(
-                          color: Colors.white,
-                          elevation: 6.0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          child: SizedBox(
-                            height: 100,
-                            width: 100,
-                            child: Image.network(e.image),
-                          ),
-                        ),
-                      ),
-                    )
-                    .toList(),
-              ),
-            ),
-            const SizedBox(
-              height: 12.0,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 12.0, left: 12.0),
-              child: Text(
-                "List of Kayak",
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 12.0,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: GridView.builder(
-                  padding: EdgeInsets.zero,
-                  shrinkWrap: true,
-                  primary: false,
-                  itemCount: bestProducts.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      mainAxisSpacing: 20,
-                      crossAxisSpacing: 20,
-                      childAspectRatio: 0.9,
-                      crossAxisCount: 2),
-                  itemBuilder: (ctx, index) {
-                    ProductModel singleProduct = bestProducts[index];
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: Colors.blueGrey.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Column(
-                        children: [
-                          Image.network(
-                            singleProduct.image,
-                            height: 60,
-                            width: 60,
-                          ),
-                          const SizedBox(
-                            height: 12.0,
-                          ),
-                          Text(
-                            singleProduct.name,
-                            style: const TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text("Price: RM${singleProduct.price}"),
-                          const SizedBox(
-                            height: 30.0,
-                          ),
-                          SizedBox(
-                            height: 45,
-                            width: 140,
-                            child: OutlinedButton(
-                              onPressed: () {},
-                              child: const Text(
-                                "BOOK",
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
-
 
 List<ProductModel> bestProducts = [
   ProductModel(
