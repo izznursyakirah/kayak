@@ -23,12 +23,13 @@ class FirebaseAuthHelper {
       return false;
     }
   }
-  
+
   Future<bool> signUp(
       String email, String password, BuildContext context) async {
     try {
       showLoaderDialog(context);
-      await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
       Navigator.of(context).pop();
       return true;
     } on FirebaseAuthException catch (error) {
