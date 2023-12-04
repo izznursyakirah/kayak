@@ -20,19 +20,25 @@ class ProductModel {
   String id;
   bool isFavourite;
   String name;
-  String price;
+  double price;
   String description;
   String status;
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
-        id: json["id"],
-        name: json["name"],
-        description: json["description"],
-        image: json["image"],
-        isFavourite: false,
-        price: json["price"],
-        status: json["status"],
-      );
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
+    double parsedPrice = json["Price"] != null
+        ? double.tryParse(json["Price"].toString()) ?? 0.0
+        : 0.0;
+
+    return ProductModel(
+      id: json["id"],
+      name: json["name"],
+      description: json["description"],
+      image: "1221", // You might want to update this to use the actual image from the JSON.
+      isFavourite: false,
+      price: parsedPrice,
+      status: json["status"],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "id": id,
@@ -40,7 +46,7 @@ class ProductModel {
         "image": image,
         "description": description,
         "isFavourite": isFavourite,
-        "price": price,
+        "price": price.toString(), // Convert price to string here.
         "status": status,
       };
 }

@@ -13,6 +13,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<CategoryModel> categoriesList = [];
+  List<ProductModel> productModelList = [];
   bool isLoading = false;
 
   @override
@@ -28,6 +29,7 @@ class _HomeState extends State<Home> {
 
     try {
       categoriesList = await FirebaseFirestoreHelper.instance.getCategories();
+      productModelList = await FirebaseFirestoreHelper.instance.getBestProducts();
     } catch (error) {
       print("Error fetching categories: $error");
     }
@@ -76,7 +78,11 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
-                  SingleChildScrollView(
+                  categoriesList.isEmpty
+                  ? Center(
+                    child: Text("Categories is Empty"),
+                  )
+                  : SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: categoriesList
@@ -116,13 +122,17 @@ class _HomeState extends State<Home> {
                   const SizedBox(
                     height: 12.0,
                   ),
-                  Padding(
+                  productModelList.isEmpty
+                  ? const Center(
+                    child: Text("List of Kayak is Empty"),
+                  )
+                  : Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: GridView.builder(
                         padding: EdgeInsets.zero,
                         shrinkWrap: true,
                         primary: false,
-                        itemCount: bestProducts.length,
+                        itemCount: productModelList.length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 mainAxisSpacing: 20,
@@ -130,7 +140,7 @@ class _HomeState extends State<Home> {
                                 childAspectRatio: 0.9,
                                 crossAxisCount: 2),
                         itemBuilder: (ctx, index) {
-                          ProductModel singleProduct = bestProducts[index];
+                          ProductModel singleProduct = productModelList[index];
                           return Container(
                             decoration: BoxDecoration(
                               color: Colors.blueGrey.withOpacity(0.5),
@@ -179,64 +189,3 @@ class _HomeState extends State<Home> {
   }
 }
 
-List<ProductModel> bestProducts = [
-  ProductModel(
-    image:
-        "https://static.vecteezy.com/system/resources/previews/023/337/469/original/ai-generative-blue-sport-kayak-isolated-on-transparent-background-free-png.png",
-    id: "1",
-    name: "Recretional Kayak",
-    price: "10",
-    description: "1 PAX ONLY",
-    status: "pending",
-    isFavourite: false,
-  ),
-  ProductModel(
-    image:
-        "https://zegulkayaks.com/media/catalog/product/cache/6dff74de1816e082be83f14edf7b50c7/k/a/kailua.png",
-    id: "2",
-    name: "Touring Kayak",
-    price: "15",
-    description: "2 PAX ONLY",
-    status: "pending",
-    isFavourite: false,
-  ),
-  ProductModel(
-    image: "https://www.pngmart.com/files/23/Kayak-PNG-Isolated-Photo.png",
-    id: "3",
-    name: "Tandem Kayak",
-    price: "20",
-    description: "2 PAX ONLY",
-    status: "pending",
-    isFavourite: false,
-  ),
-  ProductModel(
-    image:
-        "https://wheelfunrentals.com/wp-content/uploads/2021/04/AG-Small-Swan-Pedal-Boat-1024x819.png",
-    id: "50",
-    name: " Open Paddle Boat",
-    price: "4",
-    description: "5 PAX ONLY",
-    status: "pending",
-    isFavourite: false,
-  ),
-  ProductModel(
-    image:
-        "https://i.pinimg.com/originals/7d/dc/ca/7ddcca02c4732ea8fe14ab6217b8a444.png",
-    id: "25",
-    name: "Canopy Paddle Boat",
-    price: "5",
-    description: "2 PAX ONLY",
-    status: "pending",
-    isFavourite: false,
-  ),
-  ProductModel(
-    image:
-        "https://shop.prokayaks.com.au/cdn/shop/products/Contour-Boat-Cadet-3-simple_1_grande.png?v=1615437179",
-    id: "6",
-    name: "Swan Paddle Boat",
-    price: "40",
-    description: "2 PAX ONLY",
-    status: "pending",
-    isFavourite: false,
-  ),
-];
