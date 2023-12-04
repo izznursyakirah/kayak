@@ -33,7 +33,7 @@ class ProductModel {
       id: json["id"],
       name: json["name"],
       description: json["description"],
-      image: "1221", // You might want to update this to use the actual image from the JSON.
+      image: json["image"] ?? "", 
       isFavourite: false,
       price: parsedPrice,
       status: json["status"],
