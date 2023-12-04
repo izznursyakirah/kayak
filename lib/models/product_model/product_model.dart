@@ -25,8 +25,8 @@ class ProductModel {
   String status;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
-    double parsedPrice = json["Price"] != null
-        ? double.tryParse(json["Price"].toString()) ?? 0.0
+    double parsedPrice = json["price"] != null
+        ? double.tryParse(json["price"].toString()) ?? 0.0
         : 0.0;
 
     return ProductModel(

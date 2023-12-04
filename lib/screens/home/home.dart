@@ -30,6 +30,7 @@ class _HomeState extends State<Home> {
     try {
       categoriesList = await FirebaseFirestoreHelper.instance.getCategories();
       productModelList = await FirebaseFirestoreHelper.instance.getBestProducts();
+      productModelList.shuffle();
     } catch (error) {
       print("Error fetching categories: $error");
     }
@@ -79,33 +80,34 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   categoriesList.isEmpty
-                  ? Center(
-                    child: Text("Categories is Empty"),
-                  )
-                  : SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: categoriesList
-                          .map(
-                            (e) => Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Card(
-                                color: Colors.white,
-                                elevation: 6.0,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                child: SizedBox(
-                                  height: 100,
-                                  width: 100,
-                                  child: Image.network(e.image),
-                                ),
-                              ),
-                            ),
-                          )
-                          .toList(),
-                    ),
-                  ),
+                      ? Center(
+                          child: Text("Categories is Empty"),
+                        )
+                      : SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: categoriesList
+                                .map(
+                                  (e) => Padding(
+                                    padding: const EdgeInsets.only(left: 8.0),
+                                    child: Card(
+                                      color: Colors.white,
+                                      elevation: 6.0,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                      child: SizedBox(
+                                        height: 100,
+                                        width: 100,
+                                        child: Image.network(e.image),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        ),
                   const SizedBox(
                     height: 12.0,
                   ),
@@ -123,69 +125,70 @@ class _HomeState extends State<Home> {
                     height: 12.0,
                   ),
                   productModelList.isEmpty
-                  ? const Center(
-                    child: Text("List of Kayak is Empty"),
-                  )
-                  : Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: GridView.builder(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        primary: false,
-                        itemCount: productModelList.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                mainAxisSpacing: 20,
-                                crossAxisSpacing: 20,
-                                childAspectRatio: 0.9,
-                                crossAxisCount: 2),
-                        itemBuilder: (ctx, index) {
-                          ProductModel singleProduct = productModelList[index];
-                          return Container(
-                            decoration: BoxDecoration(
-                              color: Colors.blueGrey.withOpacity(0.5),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Column(
-                              children: [
-                                Image.network(
-                                  singleProduct.image,
-                                  height: 60,
-                                  width: 60,
-                                ),
-                                const SizedBox(
-                                  height: 12.0,
-                                ),
-                                Text(
-                                  singleProduct.name,
-                                  style: const TextStyle(
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.bold,
+                      ? const Center(
+                          child: Text("List of Kayak is Empty"),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: GridView.builder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              primary: false,
+                              itemCount: productModelList.length,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      mainAxisSpacing: 20,
+                                      crossAxisSpacing: 20,
+                                      childAspectRatio: 0.7,
+                                      crossAxisCount: 2),
+                              itemBuilder: (ctx, index) {
+                                ProductModel singleProduct =
+                                    productModelList[index];
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.blueGrey.withOpacity(0.5),
+                                    borderRadius: BorderRadius.circular(8.0),
                                   ),
-                                ),
-                                Text("Price: RM${singleProduct.price}"),
-                                const SizedBox(
-                                  height: 30.0,
-                                ),
-                                SizedBox(
-                                  height: 45,
-                                  width: 140,
-                                  child: OutlinedButton(
-                                    onPressed: () {},
-                                    child: const Text(
-                                      "BOOK",
-                                    ),
+                                  child: Column(
+                                    children: [
+                                      Image.network(
+                                        singleProduct.image,
+                                        height: 100,
+                                        width: 100,
+                                      ),
+                                      const SizedBox(
+                                        height: 12.0,
+                                      ),
+                                      Text(
+                                        singleProduct.name,
+                                        style: const TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text("Price: RM${singleProduct.price}"),
+                                      const SizedBox(
+                                        height: 30.0,
+                                      ),
+                                      SizedBox(
+                                        height: 45,
+                                        width: 140,
+                                        child: OutlinedButton(
+                                          onPressed: () {},
+                                          child: const Text(
+                                            "BOOK",
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ],
-                            ),
-                          );
-                        }),
-                  ),
+                                );
+                              }),
+                        ),
+                        const SizedBox(height: 12.0,),
                 ],
               ),
             ),
     );
   }
 }
-
