@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:kayak/constants/routes.dart';
 import 'package:kayak/firebase_helper/firebase_firestore_helper/firebase_firestore.dart';
 import 'package:kayak/models/category_model/category_model.dart';
 import 'package:kayak/models/product_model/product_model.dart';
+import 'package:kayak/screens/product_details/product_details.dart';
 import 'package:kayak/widgets/top_titles/top_titles.dart';
 
 class Home extends StatefulWidget {
@@ -29,7 +31,8 @@ class _HomeState extends State<Home> {
 
     try {
       categoriesList = await FirebaseFirestoreHelper.instance.getCategories();
-      productModelList = await FirebaseFirestoreHelper.instance.getBestProducts();
+      productModelList =
+          await FirebaseFirestoreHelper.instance.getBestProducts();
       productModelList.shuffle();
     } catch (error) {
       print("Error fetching categories: $error");
@@ -174,7 +177,13 @@ class _HomeState extends State<Home> {
                                         height: 45,
                                         width: 140,
                                         child: OutlinedButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Routes.instance.push(
+                                                widget: ProductDetails(
+                                                    singleProduct:
+                                                        singleProduct),
+                                                context: context);
+                                          },
                                           child: const Text(
                                             "BOOK",
                                           ),
@@ -185,7 +194,9 @@ class _HomeState extends State<Home> {
                                 );
                               }),
                         ),
-                        const SizedBox(height: 12.0,),
+                  const SizedBox(
+                    height: 12.0,
+                  ),
                 ],
               ),
             ),
