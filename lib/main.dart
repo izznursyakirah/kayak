@@ -21,10 +21,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Kayak Booking and Tracking',
-        theme: themeData,
-        home: StreamBuilder(
+      debugShowCheckedModeBanner: false,
+      title: 'Kayak Booking and Tracking',
+      theme: themeData,
+      home: StreamBuilder(
           stream: FirebaseAuthHelper.instance.getAuthChange,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -32,6 +32,6 @@ class MyApp extends StatelessWidget {
             }
             return const Welcome();
           }),
-          );
+    );
   }
 }

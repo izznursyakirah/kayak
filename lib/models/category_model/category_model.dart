@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 List<CategoryModel> CategoryModelFromJson(String str) =>
@@ -10,10 +9,12 @@ String CategoryModelToJson(List<CategoryModel> data) =>
 
 class CategoryModel {
   String id;
+  String name;
   String image;
 
   CategoryModel({
     required this.id,
+    required this.name,
     required this.image,
   });
 
@@ -21,11 +22,13 @@ class CategoryModel {
     return CategoryModel(
       id: json['id'] ?? '',
       image: json['image'] ?? '',
+      name: json['name'] ?? '',
     );
   }
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "image": image,
+        "name": name,
       };
 }
