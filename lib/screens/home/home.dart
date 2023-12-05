@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kayak/constants/routes.dart';
 import 'package:kayak/firebase_helper/firebase_firestore_helper/firebase_firestore.dart';
 import 'package:kayak/models/category_model/category_model.dart';
 import 'package:kayak/models/product_model/product_model.dart';
+import 'package:kayak/screens/category_view/category_view.dart';
 import 'package:kayak/screens/product_details/product_details.dart';
 import 'package:kayak/widgets/top_titles/top_titles.dart';
 
@@ -93,17 +95,26 @@ class _HomeState extends State<Home> {
                                 .map(
                                   (e) => Padding(
                                     padding: const EdgeInsets.only(left: 8.0),
-                                    child: Card(
-                                      color: Colors.white,
-                                      elevation: 6.0,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                      ),
-                                      child: SizedBox(
-                                        height: 100,
-                                        width: 100,
-                                        child: Image.network(e.image),
+                                    child: CupertinoButton(
+                                      padding: EdgeInsets.zero,
+                                      onPressed: () {
+                                        Routes.instance.push(
+                                            widget:
+                                                CategoryView(categoryModel: e),
+                                            context: context);
+                                      },
+                                      child: Card(
+                                        color: Colors.white,
+                                        elevation: 6.0,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                        child: SizedBox(
+                                          height: 100,
+                                          width: 100,
+                                          child: Image.network(e.image),
+                                        ),
                                       ),
                                     ),
                                   ),

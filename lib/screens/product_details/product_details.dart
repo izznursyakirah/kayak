@@ -1,6 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:kayak/constants/constants.dart';
 import 'package:kayak/models/product_model/product_model.dart';
+import 'package:kayak/provider/app_provider.dart';
+import 'package:kayak/screens/cart_screen/cart_screen.dart';
+import 'package:provider/provider.dart';
+
+import '../../constants/routes.dart';
 
 class ProductDetails extends StatefulWidget {
   final ProductModel singleProduct;
@@ -18,7 +25,9 @@ class _ProductDetailsState extends State<ProductDetails> {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Routes.instance.push(widget: CartScreen(), context: context);
+            },
             icon: const Icon(Icons.shopping_cart),
           )
         ],
@@ -30,8 +39,8 @@ class _ProductDetailsState extends State<ProductDetails> {
           children: [
             Image.network(
               widget.singleProduct.image,
-              height: 400,
-              width: 400,
+              height: 350,
+              width: 350,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -103,7 +112,12 @@ class _ProductDetailsState extends State<ProductDetails> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    AppProvider appProvider =
+                    Provider.of<AppProvider>(context, listen: false);       
+                    appProvider.addCartProduct(widget.singleProduct);
+                    showMessage("Added to Cart");
+                  },
                   child: const Text("ADD TO CART"),
                 ),
                 const SizedBox(

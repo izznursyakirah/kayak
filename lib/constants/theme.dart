@@ -34,12 +34,10 @@ ThemeData themeData = ThemeData(
     appBarTheme: const AppBarTheme(
         backgroundColor: Colors.white,
         elevation: 0.0,
-        iconTheme: IconThemeData(color: Colors.black)
-        )
-        );
+        toolbarTextStyle: TextStyle(color: Colors.black),
+        iconTheme: IconThemeData(color: Colors.black)));
 
 OutlineInputBorder outlineInputBorder = OutlineInputBorder(
     borderSide: BorderSide(
   color: Colors.grey,
-)
-);
+));

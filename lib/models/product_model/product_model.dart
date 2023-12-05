@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:html';
 
 ProductModel productModelFromJson(String str) =>
     ProductModel.fromJson(json.decode(str));
@@ -6,15 +7,15 @@ ProductModel productModelFromJson(String str) =>
 String productModelToJson(ProductModel data) => json.encode(data.toJson());
 
 class ProductModel {
-  ProductModel({
-    required this.image,
-    required this.id,
-    required this.name,
-    required this.price,
-    required this.description,
-    required this.status,
-    required this.isFavourite,
-  });
+  ProductModel(
+      {required this.image,
+      required this.id,
+      required this.name,
+      required this.price,
+      required this.description,
+      required this.status,
+      required this.isFavourite,
+      });
 
   String image;
   String id;
@@ -23,6 +24,7 @@ class ProductModel {
   double price;
   String description;
   String status;
+
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     double parsedPrice = json["price"] != null
@@ -33,7 +35,7 @@ class ProductModel {
       id: json["id"],
       name: json["name"],
       description: json["description"],
-      image: json["image"] ?? "", 
+      image: json["image"] ?? "",
       isFavourite: false,
       price: parsedPrice,
       status: json["status"],
