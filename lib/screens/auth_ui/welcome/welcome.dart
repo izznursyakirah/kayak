@@ -17,7 +17,7 @@ class Welcome extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const TopTitles(subtitle: "BUY ANYTHING YOU WANT", title: "Welcome"),
+          const TopTitles(subtitle: "KAYAK BOOKING AND TRACKING SYSTEM", title: "Hello Welcome"),
           Center(
             child: Image.asset(
               AssetsImages.instance.welcomeImage,
