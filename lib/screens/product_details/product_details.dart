@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kayak/constants/constants.dart';
 import 'package:kayak/models/product_model/product_model.dart';
 import 'package:kayak/provider/app_provider.dart';
@@ -26,7 +25,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         actions: [
           IconButton(
             onPressed: () {
-              Routes.instance.push(widget: CartScreen(), context: context);
+              Routes.instance.push(widget: const CartScreen(), context: context);
             },
             icon: const Icon(Icons.shopping_cart),
           )

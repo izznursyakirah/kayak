@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:html';
 
 ProductModel productModelFromJson(String str) =>
     ProductModel.fromJson(json.decode(str));

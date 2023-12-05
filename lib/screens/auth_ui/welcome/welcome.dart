@@ -38,7 +38,7 @@ class Welcome extends StatelessWidget {
           PrimaryButton(
             title: "Sign Up",
             onPressed: () {
-               Routes.instance.push(widget: SignUp(), context: context);
+               Routes.instance.push(widget: const SignUp(), context: context);
             },
           ),
         ],

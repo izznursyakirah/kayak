@@ -37,7 +37,7 @@ ThemeData themeData = ThemeData(
         toolbarTextStyle: TextStyle(color: Colors.black),
         iconTheme: IconThemeData(color: Colors.black)));
 
-OutlineInputBorder outlineInputBorder = OutlineInputBorder(
+OutlineInputBorder outlineInputBorder = const OutlineInputBorder(
     borderSide: BorderSide(
   color: Colors.grey,
 ));

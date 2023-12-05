@@ -54,7 +54,7 @@ class _HomeState extends State<Home> {
                 height: 100,
                 width: 100,
                 alignment: Alignment.center,
-                child: CircularProgressIndicator(),
+                child: const CircularProgressIndicator(),
               ),
             )
           : SingleChildScrollView(
@@ -85,7 +85,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   categoriesList.isEmpty
-                      ? Center(
+                      ? const Center(
                           child: Text("Categories is Empty"),
                         )
                       : SingleChildScrollView(

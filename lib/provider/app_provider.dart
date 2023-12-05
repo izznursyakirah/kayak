@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kayak/models/product_model/product_model.dart';
 
 class AppProvider with ChangeNotifier {
-  List<ProductModel> _cartProductList = [];
+  final List<ProductModel> _cartProductList = [];
 
   void addCartProduct(ProductModel productModel) {
     _cartProductList.add(productModel);

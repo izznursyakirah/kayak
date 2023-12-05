@@ -4,7 +4,6 @@ import 'package:kayak/models/category_model/category_model.dart';
 import 'package:kayak/models/product_model/product_model.dart';
 
 import '../../constants/routes.dart';
-import '../../widgets/top_titles/top_titles.dart';
 import '../product_details/product_details.dart';
 
 class CategoryView extends StatefulWidget {
@@ -46,14 +45,14 @@ class _CategoryViewState extends State<CategoryView> {
                 height: 100,
                 width: 100,
                 alignment: Alignment.center,
-                child: CircularProgressIndicator(),
+                child: const CircularProgressIndicator(),
               ),
             )
           : SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: kToolbarHeight * 1),
+                  const SizedBox(height: kToolbarHeight * 1),
                   Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Row(

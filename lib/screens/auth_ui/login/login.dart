@@ -96,7 +96,7 @@ class _LoginState extends State<Login> {
             Center(
               child: CupertinoButton(
                 onPressed: () {
-                  Routes.instance.push(widget: SignUp(), context: context);
+                  Routes.instance.push(widget: const SignUp(), context: context);
                 },
                 child: Text(
                   "Create an account",
