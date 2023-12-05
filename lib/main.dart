@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       create: (context) => AppProvider(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Kayak Booking and Tracking',
+        title: 'Kayak Booking and Tracking System',
         theme: themeData,
         home: StreamBuilder(
             stream: FirebaseAuthHelper.instance.getAuthChange,
