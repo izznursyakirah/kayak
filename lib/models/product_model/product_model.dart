@@ -6,15 +6,16 @@ ProductModel productModelFromJson(String str) =>
 String productModelToJson(ProductModel data) => json.encode(data.toJson());
 
 class ProductModel {
-  ProductModel(
-      {required this.image,
-      required this.id,
-      required this.name,
-      required this.price,
-      required this.description,
-      required this.status,
-      required this.isFavourite,
-      });
+  ProductModel({
+    required this.image,
+    required this.id,
+    required this.name,
+    required this.price,
+    required this.description,
+    required this.status,
+    required this.isFavourite,
+    this.qty
+  });
 
   String image;
   String id;
@@ -24,6 +25,7 @@ class ProductModel {
   String description;
   String status;
 
+  int? qty;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     double parsedPrice = json["price"] != null
@@ -36,6 +38,7 @@ class ProductModel {
       description: json["description"],
       image: json["image"] ?? "",
       isFavourite: false,
+      qty: json["qty"],
       price: parsedPrice,
       status: json["status"],
     );
@@ -49,5 +52,21 @@ class ProductModel {
         "isFavourite": isFavourite,
         "price": price.toString(), // Convert price to string here.
         "status": status,
+        "qty": qty,
       };
+
+  @override
+  ProductModel copyWith({
+  int? qty,
+  }) =>
+      ProductModel(
+       id: id,
+      name: name,
+      description: description,
+      image: image,
+      isFavourite: isFavourite,
+      qty: qty??this.qty,
+      price: price,
+      status: status,
+      );
 }

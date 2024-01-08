@@ -18,6 +18,13 @@ class _SingleCartItemState extends State<SingleCartItem> {
   int qty = 1;
 
   @override
+  void initState() {
+    qty = widget.singleProduct.qty ?? 1;
+    setState(() {});
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12.0),

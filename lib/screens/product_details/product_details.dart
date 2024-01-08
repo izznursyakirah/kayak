@@ -25,7 +25,8 @@ class _ProductDetailsState extends State<ProductDetails> {
         actions: [
           IconButton(
             onPressed: () {
-              Routes.instance.push(widget: const CartScreen(), context: context);
+              Routes.instance
+                  .push(widget: const CartScreen(), context: context);
             },
             icon: const Icon(Icons.shopping_cart),
           )
@@ -113,8 +114,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                 OutlinedButton(
                   onPressed: () {
                     AppProvider appProvider =
-                    Provider.of<AppProvider>(context, listen: false);       
-                    appProvider.addCartProduct(widget.singleProduct);
+                        Provider.of<AppProvider>(context, listen: false);
+                    ProductModel productModel =
+                     widget.singleProduct.copyWith(qty: qty);
+                    appProvider.addCartProduct(productModel);
                     showMessage("Added to Cart");
                   },
                   child: const Text("ADD TO CART"),
