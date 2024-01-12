@@ -5,6 +5,7 @@ import 'package:kayak/firebase_helper/firebase_options/firebase_options.dart';
 import 'package:kayak/constants/theme.dart';
 import 'package:kayak/provider/app_provider.dart';
 import 'package:kayak/screens/auth_ui/welcome/welcome.dart';
+import 'package:kayak/screens/custom_bottom_bar/custom_bottom_bar.dart';
 import 'package:kayak/screens/home/home.dart';
 import 'package:provider/provider.dart';
 
@@ -32,10 +33,11 @@ class MyApp extends StatelessWidget {
             stream: FirebaseAuthHelper.instance.getAuthChange,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return const Welcome();
+                return const CustomBottomBar();
               }
               return const Welcome();
-            }),
+            },
+          ),
       ),
     );
   }

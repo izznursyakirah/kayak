@@ -26,6 +26,9 @@ class _SingleCartItemState extends State<SingleCartItem> {
 
   @override
   Widget build(BuildContext context) {
+    AppProvider appProvider = Provider.of<AppProvider>(
+      context,
+    );
     return Container(
       margin: const EdgeInsets.only(bottom: 12.0),
       decoration: BoxDecoration(
@@ -105,10 +108,24 @@ class _SingleCartItemState extends State<SingleCartItem> {
                             ),
                             CupertinoButton(
                               padding: EdgeInsets.zero,
-                              onPressed: () {},
-                              child: const Text(
-                                "ADD TO CART",
-                                style: TextStyle(
+                              onPressed: () {
+                                if (!appProvider.getFavouriteProductList
+                                    .contains(widget.singleProduct)) {
+                                  appProvider.addFavouriteProduct(
+                                      widget.singleProduct);
+                                  showMessage("Added from cart");
+                                } else {
+                                  appProvider.removeFavouriteProduct(
+                                      widget.singleProduct);
+                                  showMessage("Removed from cart");
+                                }
+                              },
+                              child: Text(
+                                appProvider.getFavouriteProductList
+                                        .contains(widget.singleProduct)
+                                    ? "Remove to Cart"
+                                    : "Add to Cart",
+                                style: const TextStyle(
                                   fontSize: 12.0,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -128,8 +145,6 @@ class _SingleCartItemState extends State<SingleCartItem> {
                     CupertinoButton(
                         padding: EdgeInsets.zero,
                         onPressed: () {
-                          AppProvider appProvider =
-                              Provider.of<AppProvider>(context, listen: false);
                           appProvider.removeCartProduct(widget.singleProduct);
                           showMessage("Remove from Cart");
                         },

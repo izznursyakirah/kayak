@@ -4,6 +4,7 @@ import 'package:kayak/constants/constants.dart';
 import 'package:kayak/models/product_model/product_model.dart';
 import 'package:kayak/provider/app_provider.dart';
 import 'package:kayak/screens/cart_screen/cart_screen.dart';
+import 'package:kayak/screens/favourite_screen/favourite_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/routes.dart';
@@ -20,6 +21,9 @@ class _ProductDetailsState extends State<ProductDetails> {
   int qty = 1;
   @override
   Widget build(BuildContext context) {
+    AppProvider appProvider = Provider.of<AppProvider>(
+      context,
+    );
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -58,8 +62,14 @@ class _ProductDetailsState extends State<ProductDetails> {
                       widget.singleProduct.isFavourite =
                           !widget.singleProduct.isFavourite;
                     });
+                    if (widget.singleProduct.isFavourite) {
+                      appProvider.addFavouriteProduct(widget.singleProduct);
+                    } else {
+                      appProvider.removeFavouriteProduct(widget.singleProduct);
+                    }
                   },
-                  icon: Icon(widget.singleProduct.isFavourite
+                  icon: Icon(appProvider.getFavouriteProductList
+                          .contains(widget.singleProduct)
                       ? Icons.favorite
                       : Icons.favorite_border),
                 ),
@@ -113,10 +123,8 @@ class _ProductDetailsState extends State<ProductDetails> {
               children: [
                 OutlinedButton(
                   onPressed: () {
-                    AppProvider appProvider =
-                        Provider.of<AppProvider>(context, listen: false);
                     ProductModel productModel =
-                     widget.singleProduct.copyWith(qty: qty);
+                        widget.singleProduct.copyWith(qty: qty);
                     appProvider.addCartProduct(productModel);
                     showMessage("Added to Cart");
                   },
@@ -129,14 +137,17 @@ class _ProductDetailsState extends State<ProductDetails> {
                   height: 38,
                   width: 140,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      //Routes.instance.push(
+                      //widget: const FavouriteScreen(), context: context);
+                    },
                     child: const Text("RENT NOW"),
                   ),
                 ),
               ],
             ),
             const SizedBox(
-              height: 24.0,
+              height: 52.0,
             ),
           ],
         ),
