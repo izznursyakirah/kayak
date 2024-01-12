@@ -1,8 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kayak/constants/routes.dart';
 import 'package:kayak/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
+import 'package:kayak/screens/edit_profile/edit_profile.dart';
 import 'package:kayak/widgets/primary_button/primary_button.dart';
+import 'package:provider/provider.dart';
+
+import '../../provider/app_provider.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -14,6 +19,9 @@ class AccountScreen extends StatefulWidget {
 class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
+    AppProvider appProvider = Provider.of<AppProvider>(
+      context,
+    );
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -28,19 +36,21 @@ class _AccountScreenState extends State<AccountScreen> {
         Expanded(
           child: Column(
             children: [
-              const Icon(
-                Icons.person_outline,
-                size: 120,
-              ),
-              const Text(
-                "Izznur",
-                style: TextStyle(
+              appProvider.getUserInformation.image!.isEmpty
+                  ? const Icon(
+                      Icons.person_outline,
+                      size: 120,
+                    )
+                  : Image.network(appProvider.getUserInformation.image!),
+              Text(
+                appProvider.getUserInformation.name,
+                style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const Text(
-                "izznrsyakirah@gmail.com",
+              Text(
+                appProvider.getUserInformation.email,
               ),
               const SizedBox(
                 height: 10.0,
@@ -49,7 +59,10 @@ class _AccountScreenState extends State<AccountScreen> {
                 width: 150,
                 child: PrimaryButton(
                   title: "Edit Profile",
-                  onPressed: () {},
+                  onPressed: () {
+                    Routes.instance
+                        .push(widget: EditProfile(), context: context);
+                  },
                 ),
               )
             ],
