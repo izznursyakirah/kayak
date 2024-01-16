@@ -4,9 +4,11 @@ import 'package:kayak/constants/routes.dart';
 import 'package:kayak/firebase_helper/firebase_firestore_helper/firebase_firestore.dart';
 import 'package:kayak/models/category_model/category_model.dart';
 import 'package:kayak/models/product_model/product_model.dart';
+import 'package:kayak/provider/app_provider.dart';
 import 'package:kayak/screens/category_view/category_view.dart';
 import 'package:kayak/screens/product_details/product_details.dart';
 import 'package:kayak/widgets/top_titles/top_titles.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -22,6 +24,8 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
+    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
+    appProvider.getUserInfoFirebase();
     super.initState();
     getCategoryList();
   }
@@ -35,6 +39,7 @@ class _HomeState extends State<Home> {
       categoriesList = await FirebaseFirestoreHelper.instance.getCategories();
       productModelList =
           await FirebaseFirestoreHelper.instance.getBestProducts();
+
       productModelList.shuffle();
     } catch (error) {
       print("Error fetching categories: $error");
