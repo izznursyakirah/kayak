@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kayak/constants/routes.dart';
 import 'package:kayak/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
+import 'package:kayak/provider/app_provider.dart';
 import 'package:kayak/screens/edit_profile.dart/edit_profile.dart';
 import 'package:kayak/widgets/primary_button/primary_button.dart';
 
@@ -16,6 +17,7 @@ class AccountScreen extends StatefulWidget {
 class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
+    var appProvider;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -34,12 +36,18 @@ class _AccountScreenState extends State<AccountScreen> {
                 Icons.person_outline,
                 size: 120,
               ),
+              Text(
+                appProvider.getUserInformation.name,
+              ),
               const Text(
                 "Izznur",
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
+              ),
+              Text(
+                appProvider.getUserInformation.email,
               ),
               const Text(
                 "izznrsyakirah@gmail.com",
@@ -52,8 +60,8 @@ class _AccountScreenState extends State<AccountScreen> {
                 child: PrimaryButton(
                   title: "Edit Profile",
                   onPressed: () {
-                     Routes.instance
-                        .push(widget: EditProfile(), context: context);
+                    Routes.instance
+                        .push(widget: const EditProfile(), context: context);
                   },
                 ),
               )

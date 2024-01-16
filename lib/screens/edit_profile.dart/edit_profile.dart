@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -56,15 +55,15 @@ class _EditProfileState extends State<EditProfile> {
                   : Image.file(image!),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 12.0,
           ),
           TextFormField(
             decoration: InputDecoration(
-              hintText: appProvider.getUserInformation.name,
-            ),
+                //hintText: appProvider.getUserInformation.name,
+                ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 24.0,
           ),
           PrimaryButton(
