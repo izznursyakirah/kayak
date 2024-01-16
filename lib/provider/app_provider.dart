@@ -5,6 +5,8 @@ class AppProvider with ChangeNotifier {
   //// Cart List
   final List<ProductModel> _cartProductList = [];
 
+  get getUserInformation => null;
+
   void addCartProduct(ProductModel productModel) {
     _cartProductList.add(productModel);
     notifyListeners();

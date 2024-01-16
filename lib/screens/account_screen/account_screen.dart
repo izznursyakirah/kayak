@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kayak/constants/routes.dart';
 import 'package:kayak/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
+import 'package:kayak/screens/edit_profile.dart/edit_profile.dart';
 import 'package:kayak/widgets/primary_button/primary_button.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -49,7 +51,10 @@ class _AccountScreenState extends State<AccountScreen> {
                 width: 150,
                 child: PrimaryButton(
                   title: "Edit Profile",
-                  onPressed: () {},
+                  onPressed: () {
+                     Routes.instance
+                        .push(widget: EditProfile(), context: context);
+                  },
                 ),
               )
             ],
