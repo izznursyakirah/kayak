@@ -6,6 +6,7 @@ import 'package:kayak/constants/constants.dart';
 import 'package:kayak/constants/routes.dart';
 import 'package:kayak/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
 import 'package:kayak/screens/auth_ui/sign_up/sign_up.dart';
+import 'package:kayak/screens/custom_bottom_bar/custom_bottom_bar.dart';
 import 'package:kayak/screens/home/home.dart';
 import 'package:kayak/widgets/primary_button/primary_button.dart';
 import 'package:kayak/widgets/top_titles/top_titles.dart';
@@ -81,7 +82,7 @@ class _LoginState extends State<Login> {
                       .login(email.text, password.text, context);
                   if (isLogined) {
                     Routes.instance.pushAndRemoveUntil(
-                      widget: const Home(), context: context);
+                        widget: const CustomBottomBar(), context: context);
                   }
                 }
               },
@@ -96,7 +97,8 @@ class _LoginState extends State<Login> {
             Center(
               child: CupertinoButton(
                 onPressed: () {
-                  Routes.instance.push(widget: const SignUp(), context: context);
+                  Routes.instance
+                      .push(widget: const SignUp(), context: context);
                 },
                 child: Text(
                   "Create an account",
