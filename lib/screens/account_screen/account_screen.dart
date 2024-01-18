@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:kayak/constants/routes.dart';
 import 'package:kayak/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
 import 'package:kayak/provider/app_provider.dart';
-import 'package:kayak/screens/edit_profile.dart/edit_profile.dart';
+import 'package:kayak/screens/edit_profile/edit_profile.dart';
 import 'package:kayak/widgets/primary_button/primary_button.dart';
+import 'package:provider/provider.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -17,7 +18,9 @@ class AccountScreen extends StatefulWidget {
 class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
-    var appProvider;
+    AppProvider appProvider = Provider.of<AppProvider>(
+      context,
+    );
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -32,15 +35,14 @@ class _AccountScreenState extends State<AccountScreen> {
         Expanded(
           child: Column(
             children: [
-              const Icon(
-                Icons.person_outline,
-                size: 120,
-              ),
+              appProvider.getUserInformation.image!.isEmpty
+                  ? const Icon(
+                      Icons.person_outline,
+                      size: 120,
+                    )
+                  : Image.network(appProvider.getUserInformation.image!),
               Text(
                 appProvider.getUserInformation.name,
-              ),
-              const Text(
-                "Izznur",
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -48,9 +50,6 @@ class _AccountScreenState extends State<AccountScreen> {
               ),
               Text(
                 appProvider.getUserInformation.email,
-              ),
-              const Text(
-                "izznrsyakirah@gmail.com",
               ),
               const SizedBox(
                 height: 10.0,

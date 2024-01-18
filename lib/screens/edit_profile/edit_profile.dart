@@ -60,8 +60,8 @@ class _EditProfileState extends State<EditProfile> {
           ),
           TextFormField(
             decoration: InputDecoration(
-                //hintText: appProvider.getUserInformation.name,
-                ),
+              hintText: appProvider.getUserInformation?.name ?? 'Enter name',
+            ),
           ),
           const SizedBox(
             height: 24.0,

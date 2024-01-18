@@ -30,14 +30,14 @@ class MyApp extends StatelessWidget {
         title: 'Kayak Booking and Tracking System',
         theme: themeData,
         home: StreamBuilder(
-            stream: FirebaseAuthHelper.instance.getAuthChange,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return const CustomBottomBar();
-              }
-              return const Welcome();
-            },
-          ),
+          stream: FirebaseAuthHelper.instance.getAuthChange,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return const CustomBottomBar();
+            }
+            return const Welcome();
+          },
+        ),
       ),
     );
   }
