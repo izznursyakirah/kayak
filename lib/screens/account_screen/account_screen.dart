@@ -35,7 +35,7 @@ class _AccountScreenState extends State<AccountScreen> {
         Expanded(
           child: Column(
             children: [
-              appProvider.getUserInformation.image!.isEmpty
+              appProvider.getUserInformation.image==null
                   ? const Icon(
                       Icons.person_outline,
                       size: 120,

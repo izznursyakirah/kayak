@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kayak/firebase_helper/firebase_firestore_helper/firebase_firestore_helper.dart';
 import 'package:kayak/provider/app_provider.dart';
 import 'package:kayak/widgets/primary_button/primary_button.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,8 @@ class EditProfile extends StatefulWidget {
 class _EditProfileState extends State<EditProfile> {
   File? image;
   void takePicture() async {
-    XFile? value = await ImagePicker().pickImage(source: ImageSource.gallery);
+    XFile? value = await ImagePicker()
+        .pickImage(source: ImageSource.gallery, imageQuality: 40);
     if (value != null) {
       setState(() {
         image = File(value.path);
@@ -44,17 +46,23 @@ class _EditProfileState extends State<EditProfile> {
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         children: [
-          CupertinoButton(
-            onPressed: () {
-              takePicture();
-            },
-            child: CircleAvatar(
-              radius: 70,
-              child: image == null
-                  ? const Icon(Icons.camera_alt)
-                  : Image.file(image!),
-            ),
-          ),
+          image == null
+              ? CupertinoButton(
+                  onPressed: () {
+                    takePicture();
+                  },
+                  child: CircleAvatar(
+                      radius: 70, child: const Icon(Icons.camera_alt)),
+                )
+              : CupertinoButton(
+                  onPressed: () {
+                    takePicture();
+                  },
+                  child: CircleAvatar(
+                    radius: 70,
+                    backgroundImage: FileImage(image!),
+                  ),
+                ),
           const SizedBox(
             height: 12.0,
           ),
@@ -68,7 +76,17 @@ class _EditProfileState extends State<EditProfile> {
           ),
           PrimaryButton(
             title: "Update",
-            onPressed: () {},
+            onPressed: () async {
+              if (image != null) {
+                String imageUrl = await FirebaseFirestoreHelper.instance
+                    .uploadUserImage(image!);
+                print("hello");
+                print(imageUrl);
+              } else {
+                print("Image is null");
+                // Handle the case where image is null, e.g., show an error message
+              }
+            },
           ),
         ],
       ),

@@ -34,4 +34,15 @@ class UserModel {
         "name": name,
         "email": email,
       };
+
+      UserModel copyWith({
+      String? name,
+      image,
+  }) =>
+      UserModel(
+      id: id,
+      name: name??this.name,
+      email: email,
+      image: image??this.image,
+      );
 }

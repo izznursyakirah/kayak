@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kayak/constants/constants.dart';
@@ -69,4 +71,6 @@ class FirebaseFirestoreHelper {
 
     return UserModel.fromJson(querySnapshot.data()!);
   }
+
+  uploadUserImage(File file) {}
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kayak/constants/routes.dart';
-import 'package:kayak/firebase_helper/firebase_firestore_helper/firebase_firestore.dart';
+import 'package:kayak/firebase_helper/firebase_firestore_helper/firebase_firestore_helper.dart';
 import 'package:kayak/models/category_model/category_model.dart';
 import 'package:kayak/models/product_model/product_model.dart';
 import 'package:kayak/provider/app_provider.dart';
