@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kayak/constants/constants.dart';
 import 'package:kayak/firebase_helper/firebase_firestore_helper/firebase_firestore_helper.dart';
+import 'package:kayak/models/user_model/user_model.dart';
 import 'package:kayak/provider/app_provider.dart';
 import 'package:kayak/widgets/primary_button/primary_button.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +29,7 @@ class _EditProfileState extends State<EditProfile> {
     }
   }
 
+  TextEditingController textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     AppProvider appProvider = Provider.of<AppProvider>(
@@ -67,6 +70,7 @@ class _EditProfileState extends State<EditProfile> {
             height: 12.0,
           ),
           TextFormField(
+            controller: textEditingController, // Add this line to fix the issue
             decoration: InputDecoration(
               hintText: appProvider.getUserInformation?.name ?? 'Enter name',
             ),
@@ -77,15 +81,10 @@ class _EditProfileState extends State<EditProfile> {
           PrimaryButton(
             title: "Update",
             onPressed: () async {
-              if (image != null) {
-                String imageUrl = await FirebaseFirestoreHelper.instance
-                    .uploadUserImage(image!);
-                print("hello");
-                print(imageUrl);
-              } else {
-                print("Image is null");
-                // Handle the case where image is null, e.g., show an error message
-              }
+              UserModel userModel = appProvider.getUserInformation
+                  .copyWith(name: textEditingController.text);
+              appProvider.updateUserInfoFirebase(context, userModel, image);
+             
             },
           ),
         ],

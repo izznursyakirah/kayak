@@ -35,15 +35,19 @@ class _AccountScreenState extends State<AccountScreen> {
         Expanded(
           child: Column(
             children: [
-              appProvider.getUserInformation.image==null
+              appProvider.getUserInformation.image == null
                   ? const Icon(
                       Icons.person_outline,
                       size: 120,
                     )
-                  : Image.network(appProvider.getUserInformation.image!),
+                  : CircleAvatar(
+                      backgroundImage:
+                          NetworkImage(appProvider.getUserInformation.image!),
+                      radius: 70,
+                    ),
               Text(
                 appProvider.getUserInformation.name,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
@@ -87,6 +91,11 @@ class _AccountScreenState extends State<AccountScreen> {
                 title: const Text("About Us"),
               ),
               ListTile(
+                onTap: () {},
+                leading: const Icon(Icons.support_outlined),
+                title: const Text("Support"),
+              ),
+               ListTile(
                 onTap: () {},
                 leading: const Icon(Icons.support_outlined),
                 title: const Text("Support"),
