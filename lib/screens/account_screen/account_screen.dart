@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:kayak/constants/routes.dart';
 import 'package:kayak/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
 import 'package:kayak/provider/app_provider.dart';
+import 'package:kayak/screens/change_password/change_password.dart';
 import 'package:kayak/screens/edit_profile/edit_profile.dart';
 import 'package:kayak/widgets/primary_button/primary_button.dart';
 import 'package:provider/provider.dart';
@@ -95,10 +96,13 @@ class _AccountScreenState extends State<AccountScreen> {
                 leading: const Icon(Icons.support_outlined),
                 title: const Text("Support"),
               ),
-               ListTile(
-                onTap: () {},
-                leading: const Icon(Icons.support_outlined),
-                title: const Text("Support"),
+              ListTile(
+                onTap: () {
+                  Routes.instance
+                      .push(widget: const ChangePassword(), context: context);
+                },
+                leading: const Icon(Icons.change_circle_outlined),
+                title: const Text("Change Password"),
               ),
               ListTile(
                 onTap: () {

@@ -17,9 +17,9 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   bool isShowPassword = true;
-  TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
-    TextEditingController name = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController name = TextEditingController();
   TextEditingController phone = TextEditingController();
   @override
   Widget build(BuildContext context) {

@@ -84,7 +84,6 @@ class _EditProfileState extends State<EditProfile> {
               UserModel userModel = appProvider.getUserInformation
                   .copyWith(name: textEditingController.text);
               appProvider.updateUserInfoFirebase(context, userModel, image);
-             
             },
           ),
         ],
