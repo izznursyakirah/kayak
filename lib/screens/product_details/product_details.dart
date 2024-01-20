@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kayak/constants/constants.dart';
 import 'package:kayak/models/product_model/product_model.dart';
 import 'package:kayak/provider/app_provider.dart';
+import 'package:kayak/screens/check_out/check_out.dart';
 import 'package:kayak/screens/cart_screen/cart_screen.dart';
 import 'package:kayak/screens/favourite_screen/favourite_screen.dart';
 import 'package:provider/provider.dart';
@@ -138,8 +139,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                   width: 140,
                   child: ElevatedButton(
                     onPressed: () {
-                      //Routes.instance.push(
-                      //widget: const FavouriteScreen(), context: context);
+                      Routes.instance
+                          .push(widget: const Checkout(), context: context);
                     },
                     child: const Text("RENT NOW"),
                   ),

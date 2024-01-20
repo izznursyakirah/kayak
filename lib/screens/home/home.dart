@@ -34,13 +34,11 @@ class _HomeState extends State<Home> {
     setState(() {
       isLoading = true;
     });
-      categoriesList = await FirebaseFirestoreHelper.instance.getCategories();
-      productModelList = await FirebaseFirestoreHelper.instance.getBestProducts();
-      
-      productModelList.shuffle();
-    setState(() {
-      isLoading = false;
-    });
+    categoriesList = await FirebaseFirestoreHelper.instance.getCategories();
+    productModelList = await FirebaseFirestoreHelper.instance.getBestProducts();
+
+    productModelList.shuffle();
+    isLoading = false;
   }
 
   @override

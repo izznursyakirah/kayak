@@ -6,6 +6,7 @@ import 'package:kayak/firebase_helper/firebase_auth_helper/firebase_auth_helper.
 import 'package:kayak/provider/app_provider.dart';
 import 'package:kayak/screens/change_password/change_password.dart';
 import 'package:kayak/screens/edit_profile/edit_profile.dart';
+import 'package:kayak/screens/favourite_screen/favourite_screen.dart';
 import 'package:kayak/widgets/primary_button/primary_button.dart';
 import 'package:provider/provider.dart';
 
@@ -82,7 +83,10 @@ class _AccountScreenState extends State<AccountScreen> {
                 title: const Text("Your Booking"),
               ),
               ListTile(
-                onTap: () {},
+                onTap: () {
+                  Routes.instance
+                      .push(widget: const FavouriteScreen(), context: context);
+                },
                 leading: const Icon(Icons.favorite_outline),
                 title: const Text("Favourite"),
               ),

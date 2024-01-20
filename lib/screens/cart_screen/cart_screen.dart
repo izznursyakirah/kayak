@@ -1,9 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:kayak/screens/cart_screen/widgets/single_cart_item.dart';
+import 'package:kayak/screens/check_out/check_out.dart';
 import 'package:provider/provider.dart';
 
+import '../../constants/routes.dart';
 import '../../provider/app_provider.dart';
+import '../../widgets/primary_button/primary_button.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -19,7 +21,46 @@ class _CartScreenState extends State<CartScreen> {
       context,
     );
     return Scaffold(
+      bottomNavigationBar: SizedBox(
+        height: 180,
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Total",
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    "\RM${appProvider.totalPrice().toString()}",
+                    style: const TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 24.0,
+              ),
+              PrimaryButton(
+                title: "Checkout",
+                onPressed: () {
+                  Routes.instance.push(widget: Checkout(), context: context);
+                },
+              )
+            ],
+          ),
+        ),
+      ),
       appBar: AppBar(
+        centerTitle: true,
         //backgroundColor: Colors.white,
         title: const Text(
           "Cart Screen",
