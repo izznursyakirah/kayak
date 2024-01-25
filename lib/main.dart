@@ -6,6 +6,7 @@ import 'package:kayak/constants/theme.dart';
 import 'package:kayak/provider/app_provider.dart';
 import 'package:kayak/screens/auth_ui/welcome/welcome.dart';
 import 'package:kayak/screens/custom_bottom_bar/custom_bottom_bar.dart';
+import 'package:kayak/screens/home/home.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
