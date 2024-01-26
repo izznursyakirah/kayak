@@ -21,6 +21,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
   List<Widget> _buildScreens() => [
         const Home(),
         const CartScreen(),
+        const FavouriteScreen(),
         const AccountScreen(),
       ];
 
@@ -36,6 +37,13 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
           icon: const Icon(Icons.shopping_cart),
           inactiveIcon: const Icon(Icons.shopping_cart_outlined),
           title: "Cart",
+          activeColorPrimary: Colors.white,
+          inactiveColorPrimary: Colors.white,
+        ),
+        PersistentBottomNavBarItem(
+          icon: const Icon(Icons.favorite),
+          inactiveIcon: const Icon(Icons.favorite_border_outlined),
+          title: "Booking",
           activeColorPrimary: Colors.white,
           inactiveColorPrimary: Colors.white,
         ),
