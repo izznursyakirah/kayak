@@ -1,9 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kayak/constants/routes.dart';
+import 'package:kayak/firebase_helper/firebase_firestore_helper/firebase_firestore_helper.dart';
+import 'package:kayak/models/product_model/product_model.dart';
+import 'package:kayak/provider/app_provider.dart';
+import 'package:kayak/screens/custom_bottom_bar/custom_bottom_bar.dart';
 import 'package:kayak/widgets/primary_button/primary_button.dart';
+import 'package:provider/provider.dart';
 
 class Checkout extends StatefulWidget {
-  const Checkout({super.key});
+  final ProductModel singleProduct;
+  const Checkout({super.key, required this.singleProduct});
 
   @override
   State<Checkout> createState() => _CheckoutState();
@@ -13,6 +20,9 @@ class _CheckoutState extends State<Checkout> {
   int groupValue = 1;
   @override
   Widget build(BuildContext context) {
+    AppProvider appProvider = Provider.of<AppProvider>(
+      context,
+    );
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -103,7 +113,20 @@ class _CheckoutState extends State<Checkout> {
             ),
             PrimaryButton(
               title: "Continue",
-              onPressed: () {},
+              onPressed: () async {
+                appProvider.getBuyProductList.clear();
+                appProvider.addBuyProduct(widget.singleProduct);
+
+                bool value = await FirebaseFirestoreHelper.instance
+                    .uploadOrderedProductFirebase(
+                        appProvider.getBuyProductList, context, groupValue==1? "Cash On Delivery" : "Paid");
+                if (value) {
+                  Future.delayed(Duration(seconds: 2), () {
+                   
+                  Routes.instance.push(widget: const CustomBottomBar(), context: context);
+                  });
+                }
+              },
             )
           ],
         ),

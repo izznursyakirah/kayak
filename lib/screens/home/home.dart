@@ -10,6 +10,8 @@ import 'package:kayak/screens/product_details/product_details.dart';
 import 'package:kayak/widgets/top_titles/top_titles.dart';
 import 'package:provider/provider.dart';
 
+import '../custom_bottom_bar/custom_bottom_bar.dart';
+
 class Home extends StatefulWidget {
   const Home({super.key});
 

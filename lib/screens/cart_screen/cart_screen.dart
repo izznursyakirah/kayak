@@ -52,7 +52,7 @@ class _CartScreenState extends State<CartScreen> {
               PrimaryButton(
                 title: "Checkout",
                 onPressed: () {
-                  Routes.instance.push(widget: Checkout(), context: context);
+                  //Routes.instance.push(widget: Checkout(), context: context);
                 },
               )
             ],

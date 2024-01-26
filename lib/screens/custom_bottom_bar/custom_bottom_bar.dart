@@ -65,7 +65,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
           hideNavigationBar: _hideNavBar,
           decoration: const NavBarDecoration(colorBehindNavBar: Colors.indigo),
           itemAnimationProperties: const ItemAnimationProperties(
-            duration: Duration(milliseconds: 400),
+            duration: Duration(milliseconds: 200),
             curve: Curves.ease,
           ),
           screenTransitionAnimation: const ScreenTransitionAnimation(

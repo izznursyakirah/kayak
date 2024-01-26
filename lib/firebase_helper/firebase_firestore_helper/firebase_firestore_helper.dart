@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:kayak/constants/constants.dart';
 import 'package:kayak/models/category_model/category_model.dart';
 import 'package:kayak/models/product_model/product_model.dart';
@@ -73,4 +74,34 @@ class FirebaseFirestoreHelper {
   }
 
   uploadUserImage(File file) {}
+
+  Future<bool> uploadOrderedProductFirebase(
+      List<ProductModel> list, BuildContext context, String payment) async {
+    try {
+      showLoaderDialog(context);
+      double totalPrice = 0.0;
+      for (var element in list) {
+        totalPrice += element.price * element.qty!;
+      }
+      DocumentReference documentReference = await _firebaseFirestore
+          .collection("usersOrders")
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection("orders")
+          .doc();
+
+      documentReference.set({
+        "products": list.map((e) => e.toJson()),
+        "status": "Pending",
+        "totalPrice": totalPrice,
+        "payment": payment,
+      });
+      Navigator.of(context, rootNavigator: true).pop();
+      showMessage("Ordered Successfully");
+      return true;
+    } catch (e) {
+      showMessage(e.toString());
+      Navigator.of(context, rootNavigator: true).pop();
+      return false;
+    }
+  }
 }

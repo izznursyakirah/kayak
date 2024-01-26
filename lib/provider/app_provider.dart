@@ -96,7 +96,12 @@ class AppProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  ///BUY PRODUCT
+  ///BUY PRODUCT///
 
+  void addBuyProduct(ProductModel model) {
+    _buyProductList.add(model);
+    notifyListeners();
+  }
 
+  List<ProductModel> get getBuyProductList => _buyProductList;
 }
