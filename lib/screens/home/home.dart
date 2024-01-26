@@ -31,14 +31,24 @@ class _HomeState extends State<Home> {
   }
 
   void getCategoryList() async {
+    print('getCategoryList started'); // Added print statement
     setState(() {
       isLoading = true;
     });
     categoriesList = await FirebaseFirestoreHelper.instance.getCategories();
+    print(
+        'Categories fetched: ${categoriesList.length}'); // Added print statement
     productModelList = await FirebaseFirestoreHelper.instance.getBestProducts();
+    print(
+        'Products fetched: ${productModelList.length}'); // Added print statement
 
     productModelList.shuffle();
-    isLoading = false;
+
+    setState(() {
+      isLoading = false;
+    });
+
+    print('getCategoryList finished'); // Added print statement
   }
 
   @override
