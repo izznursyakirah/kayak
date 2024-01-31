@@ -74,6 +74,21 @@ class OrderScreen extends StatelessWidget {
                             const SizedBox(
                               height: 12.0,
                             ),
+                            orderModel.products.length > 1
+                                ? SizedBox.fromSize()
+                                : Column(
+                                    children: [
+                                      Text(
+                                        "Quantity: ${orderModel.products[0].qty.toString()}",
+                                        style: const TextStyle(
+                                          fontSize: 12.0,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 12.0,
+                                      ),
+                                    ],
+                                  ),
                             Text(
                               "Total Price: RM${orderModel.totalPrice.toString()}",
                               style: const TextStyle(
@@ -95,10 +110,10 @@ class OrderScreen extends StatelessWidget {
                     ],
                   ),
                   children: orderModel.products.length > 1
-                      ? []
-                      : [
+                      ? [
                           const Text("Hello"),
-                        ],
+                        ]
+                      : [],
                 ),
               );
             },

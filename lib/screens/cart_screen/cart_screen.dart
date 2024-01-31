@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kayak/screens/cart_item_checkout/cart_item_checkout.dart';
 import 'package:kayak/screens/cart_screen/widgets/single_cart_item.dart';
 import 'package:kayak/screens/check_out/check_out.dart';
 import 'package:provider/provider.dart';
@@ -52,7 +53,10 @@ class _CartScreenState extends State<CartScreen> {
               PrimaryButton(
                 title: "Checkout",
                 onPressed: () {
-                  //Routes.instance.push(widget: Checkout(), context: context);
+                  appProvider.clearBuyProduct();
+                  appProvider.addBuyProductCartList();
+                  appProvider.clearCart();
+                  Routes.instance.push(widget: const CartItemCheckout(), context: context);
                 },
               )
             ],
