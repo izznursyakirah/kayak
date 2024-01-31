@@ -12,7 +12,6 @@ class ProductModel {
     required this.name,
     required this.price,
     required this.description,
-    required this.status,
     required this.isFavourite,
     this.qty
   });
@@ -23,7 +22,7 @@ class ProductModel {
   String name;
   double price;
   String description;
-  String status;
+
 
   int? qty;
 
@@ -40,7 +39,6 @@ class ProductModel {
       isFavourite: false,
       qty: json["qty"],
       price: parsedPrice,
-      status: json["status"],
     );
   }
 
@@ -51,7 +49,6 @@ class ProductModel {
         "description": description,
         "isFavourite": isFavourite,
         "price": price.toString(), // Convert price to string here.
-        "status": status,
         "qty": qty,
       };
 
@@ -67,6 +64,6 @@ class ProductModel {
       isFavourite: isFavourite,
       qty: qty??this.qty,
       price: price,
-      status: status,
+      
       );
 }

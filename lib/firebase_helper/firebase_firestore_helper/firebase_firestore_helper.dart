@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -5,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kayak/constants/constants.dart';
 import 'package:kayak/models/category_model/category_model.dart';
+import 'package:kayak/models/order_model/order_model.dart';
 import 'package:kayak/models/product_model/product_model.dart';
 import 'package:kayak/models/user_model/user_model.dart';
 
@@ -88,9 +91,19 @@ class FirebaseFirestoreHelper {
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection("orders")
           .doc();
+      DocumentReference admin = _firebaseFirestore.collection("orders").doc();
 
+      List<Map<String, dynamic>> productList =
+          list.map((e) => e.toJson()).toList();
+
+      admin.set({
+        "products": productList,
+        "status": "Pending",
+        "totalPrice": totalPrice,
+        "payment": payment,
+      });
       documentReference.set({
-        "products": list.map((e) => e.toJson()),
+        "products": productList,
         "status": "Pending",
         "totalPrice": totalPrice,
         "payment": payment,
@@ -102,6 +115,36 @@ class FirebaseFirestoreHelper {
       showMessage(e.toString());
       Navigator.of(context, rootNavigator: true).pop();
       return false;
+    }
+  }
+
+  //GET ORDER USER
+
+  Future<List<OrderModel>> getUserOrder() async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> querySnapshot =
+          await _firebaseFirestore
+              .collection("usersOrders")
+              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .collection("orders")
+              .get();
+
+      List<OrderModel> orderList = querySnapshot.docs
+          .where((doc) => doc.exists) // Check if the document exists
+          .map((element) {
+            final data = element.data();
+            if (data != null) {
+              return OrderModel.fromJson(data);
+            }
+          })
+          .where((item) => item != null)
+          .toList()
+          .cast<OrderModel>();
+
+      return orderList;
+    } catch (e) {
+      showMessage(e.toString());
+      return [];
     }
   }
 }

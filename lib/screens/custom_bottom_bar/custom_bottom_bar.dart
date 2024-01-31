@@ -3,6 +3,7 @@ import 'package:kayak/screens/account_screen/account_screen.dart';
 import 'package:kayak/screens/cart_screen/cart_screen.dart';
 import 'package:kayak/screens/favourite_screen/favourite_screen.dart';
 import 'package:kayak/screens/home/home.dart';
+import 'package:kayak/screens/order_screen/order_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class CustomBottomBar extends StatefulWidget {
@@ -21,7 +22,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
   List<Widget> _buildScreens() => [
         const Home(),
         const CartScreen(),
-        const FavouriteScreen(),
+        const OrderScreen(),
         const AccountScreen(),
       ];
 

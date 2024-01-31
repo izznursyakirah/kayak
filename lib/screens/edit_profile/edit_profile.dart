@@ -54,15 +54,15 @@ class _EditProfileState extends State<EditProfile> {
                   onPressed: () {
                     takePicture();
                   },
-                  child: CircleAvatar(
-                      radius: 70, child: const Icon(Icons.camera_alt)),
+                  child: const CircleAvatar(
+                      radius: 55, child: Icon(Icons.camera_alt)),
                 )
               : CupertinoButton(
                   onPressed: () {
                     takePicture();
                   },
                   child: CircleAvatar(
-                    radius: 70,
+                    radius: 55,
                     backgroundImage: FileImage(image!),
                   ),
                 ),
