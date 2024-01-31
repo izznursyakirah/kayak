@@ -36,23 +36,70 @@ class OrderScreen extends StatelessWidget {
           }
           return ListView.builder(
             itemCount: snapshot.data!.length,
+            padding: const EdgeInsets.all(12.0),
             itemBuilder: (context, index) {
               OrderModel orderModel = snapshot.data![index];
-              return ExpansionTile(
-                
-                title: Text(
-                  orderModel.payment, // Assuming item has a property playerName
-                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 12.0),
+                child: ExpansionTile(
+                  childrenPadding: EdgeInsets.zero,
+                  tilePadding: EdgeInsets.zero,
+                  collapsedShape: const RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.grey, width: 2.3)),
+                  shape: const RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.grey, width: 2.3)),
+                  title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Container(
+                        height: 120,
+                        width: 120,
+                        color: Colors.blueGrey.withOpacity(0.5),
+                        child: Image.network(
+                          orderModel.products[0].image,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              orderModel.products[0].name,
+                              style: const TextStyle(
+                                fontSize: 12.0,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 12.0,
+                            ),
+                            Text(
+                              "Total Price: RM${orderModel.totalPrice.toString()}",
+                              style: const TextStyle(
+                                fontSize: 12.0,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 12.0,
+                            ),
+                            Text(
+                              "Order Status:${orderModel.status}",
+                              style: const TextStyle(
+                                fontSize: 12.0,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  children: orderModel.products.length > 1
+                      ? []
+                      : [
+                          const Text("Hello"),
+                        ],
                 ),
-                children: <Widget>[
-                  ListTile(
-                    title: Text(
-                      orderModel
-                          .status, // Assuming item has a property description
-                      style: TextStyle(fontWeight: FontWeight.w700),
-                    ),
-                  )
-                ],
               );
             },
           );

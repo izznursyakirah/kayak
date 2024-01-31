@@ -20,12 +20,12 @@ class OrderModel {
   String orderId;
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
-  List<dynamic> productMap = json["products"] ?? [];
-  return OrderModel(
-      orderId: json["orderId"] ?? "",
-      products: productMap.map((e) => ProductModel.fromJson(e)).toList(),
-      totalPrice: json["totalPrice"] ?? 0.0,
-      status: json["status"] ?? "",
-      payment: json["payment"] ?? "");
-}
+    List<dynamic> productMap = json["products"] ?? [];
+    return OrderModel(
+        orderId: json["orderId"] ?? "",
+        products: productMap.map((e) => ProductModel.fromJson(e)).toList(),
+        totalPrice: json["totalPrice"] ?? 0.0,
+        status: json["status"] ?? "",
+        payment: json["payment"] ?? "");
+  }
 }
