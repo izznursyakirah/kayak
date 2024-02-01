@@ -114,16 +114,16 @@ class _CheckoutState extends State<Checkout> {
             PrimaryButton(
               title: "Continue",
               onPressed: () async {
-                appProvider.getBuyProductList.clear();
+                appProvider.clearBuyProduct();
                 appProvider.addBuyProduct(widget.singleProduct);
 
                 bool value = await FirebaseFirestoreHelper.instance
-                    .uploadOrderedProductFirebase(
-                        appProvider.getBuyProductList, context, groupValue==1? "Cash On Delivery" : "Paid");
+                    .uploadOrderedProductFirebase(appProvider.getBuyProductList,
+                        context, groupValue == 1 ? "Cash On Delivery" : "Paid");
                 if (value) {
-                  Future.delayed(Duration(seconds: 2), () {
-                   
-                  Routes.instance.push(widget: const CustomBottomBar(), context: context);
+                  Future.delayed(const Duration(seconds: 2), () {
+                    Routes.instance.push(
+                        widget: const CustomBottomBar(), context: context);
                   });
                 }
               },

@@ -111,7 +111,68 @@ class OrderScreen extends StatelessWidget {
                   ),
                   children: orderModel.products.length > 1
                       ? [
-                          const Text("Hello"),
+                          const Text("Details"),
+                          const Divider(
+                            color: Colors.grey,
+                          ),
+                          ...orderModel.products.map((singleProduct) {
+                            return Column(
+                              children: [
+                                Row(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.baseline,
+                                  textBaseline: TextBaseline.alphabetic,
+                                  children: [
+                                    Container(
+                                      height: 80,
+                                      width: 80,
+                                      color: Colors.blueGrey.withOpacity(0.5),
+                                      child: Image.network(
+                                        singleProduct.image,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(12.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            singleProduct.name,
+                                            style: const TextStyle(
+                                              fontSize: 12.0,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 12.0,
+                                          ),
+                                          Column(
+                                            children: [
+                                              Text(
+                                                "Quantity: ${singleProduct.qty.toString()}",
+                                                style: const TextStyle(
+                                                  fontSize: 12.0,
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 12.0,
+                                              ),
+                                            ],
+                                          ),
+                                          Text(
+                                            "Price: RM${singleProduct.price.toString()}",
+                                            style: const TextStyle(
+                                              fontSize: 12.0,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            );
+                          }).toList()
                         ]
                       : [],
                 ),

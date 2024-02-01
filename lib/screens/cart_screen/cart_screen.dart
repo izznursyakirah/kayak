@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kayak/constants/constants.dart';
 import 'package:kayak/screens/cart_item_checkout/cart_item_checkout.dart';
 import 'package:kayak/screens/cart_screen/widgets/single_cart_item.dart';
 import 'package:kayak/screens/check_out/check_out.dart';
@@ -56,7 +57,12 @@ class _CartScreenState extends State<CartScreen> {
                   appProvider.clearBuyProduct();
                   appProvider.addBuyProductCartList();
                   appProvider.clearCart();
-                  Routes.instance.push(widget: const CartItemCheckout(), context: context);
+                  if (appProvider.getCartProductList.isEmpty) {
+                    showMessage("Cart is Empty");
+                  } else {
+                    Routes.instance.push(
+                        widget: const CartItemCheckout(), context: context);
+                  }
                 },
               )
             ],

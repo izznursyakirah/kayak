@@ -117,6 +117,8 @@ class _CheckoutState extends State<CartItemCheckout> {
                 bool value = await FirebaseFirestoreHelper.instance
                     .uploadOrderedProductFirebase(appProvider.getBuyProductList,
                         context, groupValue == 1 ? "Cash On Delivery" : "Paid");
+
+                appProvider.clearBuyProduct();
                 if (value) {
                   Future.delayed(Duration(seconds: 2), () {
                     Routes.instance.push(
