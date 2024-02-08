@@ -1,18 +1,15 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kayak/constants/routes.dart';
 import 'package:kayak/firebase_helper/firebase_firestore_helper/firebase_firestore_helper.dart';
 import 'package:kayak/provider/app_provider.dart';
 import 'package:kayak/screens/custom_bottom_bar/custom_bottom_bar.dart';
-import 'package:kayak/stripe_helper/stripe_helper.dart';
 import 'package:kayak/widgets/primary_button/primary_button.dart';
 import 'package:provider/provider.dart';
 
 class CartItemCheckout extends StatefulWidget {
   const CartItemCheckout({
-    Key? key,
+    super.key,
   });
 
   @override
@@ -21,7 +18,6 @@ class CartItemCheckout extends StatefulWidget {
 
 class _CheckoutState extends State<CartItemCheckout> {
   int groupValue = 1;
-
   @override
   Widget build(BuildContext context) {
     AppProvider appProvider = Provider.of<AppProvider>(
@@ -118,34 +114,19 @@ class _CheckoutState extends State<CartItemCheckout> {
             PrimaryButton(
               title: "Continue",
               onPressed: () async {
-                if (groupValue == 1) {
-                  bool value = await FirebaseFirestoreHelper.instance
-                      .uploadOrderedProductFirebase(
-                          appProvider.getBuyProductList,
-                          context,
-                          "Cash On Delivery");
+                bool value = await FirebaseFirestoreHelper.instance
+                    .uploadOrderedProductFirebase(appProvider.getBuyProductList,
+                        context, groupValue == 1 ? "Cash On Delivery" : "Paid");
 
-                  appProvider.clearBuyProduct();
-                  if (value) {
-                    Future.delayed(const Duration(seconds: 2), () {
-                      Routes.instance.push(
-                          widget: const CustomBottomBar(), context: context);
-                    });
-                  }
-                } else {
-                  print("Hello");
-                  int value = double.parse(
-                          appProvider.totalPriceBuyProductList().toString())
-                      .round()
-                      .toInt();
-                  String totalPrice = (value * 100).toString();
-                  print(totalPrice);
-                  await StripeHelper.instance
-                      .makePayment(totalPrice.toString());
-                 
+                appProvider.clearBuyProduct();
+                if (value) {
+                  Future.delayed(Duration(seconds: 2), () {
+                    Routes.instance.push(
+                        widget: const CustomBottomBar(), context: context);
+                  });
                 }
               },
-            ),
+            )
           ],
         ),
       ),

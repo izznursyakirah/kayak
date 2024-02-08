@@ -54,15 +54,6 @@ class _HomeState extends State<Home> {
     print('getCategoryList finished'); // Added print statement
   }
 
-  TextEditingController search = TextEditingController();
-  List<ProductModel> searchList = [];
-  void searchProducts(String value) {
-    searchList = productModelList
-        .where((element) => element.name.toLowerCase() == value.toLowerCase())
-        .toList();
-    print(searchList.length);
-    setState(() {});
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,10 +77,6 @@ class _HomeState extends State<Home> {
                       children: [
                         const TopTitles(subtitle: "", title: "Kayak Booking"),
                         TextFormField(
-                          controller: search,
-                          onChanged: (String value) {
-                            searchProducts(value);
-                          },
                           decoration: const InputDecoration(
                               hintText: "Search........."),
                         ),
@@ -160,80 +147,7 @@ class _HomeState extends State<Home> {
                   const SizedBox(
                     height: 12.0,
                   ),
-                  search.text.isNotEmpty && searchList.isEmpty
-                      ? Center(
-                          child: Text("No Product Found"),
-                        )
-                      : searchList.isNotEmpty
-                          ? const Center(
-                              child: Text("Kayak is not available "),
-                            )
-                          : Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: GridView.builder(
-                                  padding: const EdgeInsets.only(bottom: 50),
-                                  shrinkWrap: true,
-                                  primary: false,
-                                  itemCount: searchList.length,
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                          mainAxisSpacing: 20,
-                                          crossAxisSpacing: 20,
-                                          childAspectRatio: 0.7,
-                                          crossAxisCount: 2),
-                                  itemBuilder: (ctx, index) {
-                                    ProductModel singleProduct =
-                                        searchList[index];
-                                    return Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.blueGrey.withOpacity(0.5),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Image.network(
-                                            singleProduct.image,
-                                            height: 100,
-                                            width: 100,
-                                          ),
-                                          const SizedBox(
-                                            height: 12.0,
-                                          ),
-                                          Text(
-                                            singleProduct.name,
-                                            style: const TextStyle(
-                                              fontSize: 18.0,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          Text(
-                                              "Price: RM${singleProduct.price}"),
-                                          const SizedBox(
-                                            height: 30.0,
-                                          ),
-                                          SizedBox(
-                                            height: 45,
-                                            width: 140,
-                                            child: OutlinedButton(
-                                              onPressed: () {
-                                                Routes.instance.push(
-                                                    widget: ProductDetails(
-                                                        singleProduct:
-                                                            singleProduct),
-                                                    context: context);
-                                              },
-                                              child: const Text(
-                                                "BOOK",
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  }),
-                            ),
-                  searchList.isNotEmpty
+                  productModelList.isEmpty
                       ? const Center(
                           child: Text("List of Kayak is Empty"),
                         )
