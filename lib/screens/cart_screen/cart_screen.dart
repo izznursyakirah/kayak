@@ -54,12 +54,12 @@ class _CartScreenState extends State<CartScreen> {
               PrimaryButton(
                 title: "Checkout",
                 onPressed: () {
-                  appProvider.clearBuyProduct();
-                  appProvider.addBuyProductCartList();
-                  appProvider.clearCart();
                   if (appProvider.getCartProductList.isEmpty) {
                     showMessage("Cart is Empty");
                   } else {
+                    appProvider.clearBuyProduct();
+                    appProvider.addBuyProductCartList();
+                    appProvider.clearCart();
                     Routes.instance.push(
                         widget: const CartItemCheckout(), context: context);
                   }
@@ -73,7 +73,7 @@ class _CartScreenState extends State<CartScreen> {
         centerTitle: true,
         //backgroundColor: Colors.white,
         title: const Text(
-          "Cart Screen",
+          "Booking Screen",
           style: TextStyle(
             color: Colors.black,
           ),

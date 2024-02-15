@@ -6,7 +6,8 @@ import 'package:kayak/firebase_helper/firebase_auth_helper/firebase_auth_helper.
 import 'package:kayak/provider/app_provider.dart';
 import 'package:kayak/screens/change_password/change_password.dart';
 import 'package:kayak/screens/edit_profile/edit_profile.dart';
-import 'package:kayak/screens/favourite_screen/favourite_screen.dart';
+import 'package:kayak/screens/favourite_screen/location_screen.dart';
+import 'package:kayak/screens/order_screen/order_screen.dart';
 import 'package:kayak/widgets/primary_button/primary_button.dart';
 import 'package:provider/provider.dart';
 
@@ -78,27 +79,20 @@ class _AccountScreenState extends State<AccountScreen> {
           child: Container(
             child: Column(children: [
               ListTile(
-                onTap: () {},
-                leading: const Icon(Icons.shopping_bag_outlined),
+                onTap: () {
+                  Routes.instance
+                      .push(widget: const OrderScreen(), context: context);
+                },
+                leading: const Icon(Icons.book_online_outlined),
                 title: const Text("Your Booking"),
               ),
               ListTile(
                 onTap: () {
                   Routes.instance
-                      .push(widget: const FavouriteScreen(), context: context);
+                      .push(widget: LocationScreen(), context: context);
                 },
-                leading: const Icon(Icons.favorite_outline),
-                title: const Text("Favourite"),
-              ),
-              ListTile(
-                onTap: () {},
-                leading: const Icon(Icons.info),
-                title: const Text("About Us"),
-              ),
-              ListTile(
-                onTap: () {},
-                leading: const Icon(Icons.support_outlined),
-                title: const Text("Support"),
+                leading: const Icon(Icons.location_on_rounded),
+                title: const Text("Location"),
               ),
               ListTile(
                 onTap: () {

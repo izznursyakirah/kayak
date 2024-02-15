@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kayak/screens/account_screen/account_screen.dart';
 import 'package:kayak/screens/cart_screen/cart_screen.dart';
-import 'package:kayak/screens/favourite_screen/favourite_screen.dart';
+import 'package:kayak/screens/favourite_screen/location_screen.dart';
 import 'package:kayak/screens/home/home.dart';
 import 'package:kayak/screens/order_screen/order_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -42,8 +42,8 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
           inactiveColorPrimary: Colors.white,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.favorite),
-          inactiveIcon: const Icon(Icons.favorite_border_outlined),
+          icon: const Icon(Icons.book_online),
+          inactiveIcon: const Icon(Icons.book_online),
           title: "Booking",
           activeColorPrimary: Colors.white,
           inactiveColorPrimary: Colors.white,

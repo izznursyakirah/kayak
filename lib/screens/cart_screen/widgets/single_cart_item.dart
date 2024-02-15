@@ -111,31 +111,6 @@ class _SingleCartItemState extends State<SingleCartItem> {
                                 ),
                               ],
                             ),
-                            CupertinoButton(
-                              padding: EdgeInsets.zero,
-                              onPressed: () {
-                                if (!appProvider.getFavouriteProductList
-                                    .contains(widget.singleProduct)) {
-                                  appProvider.addFavouriteProduct(
-                                      widget.singleProduct);
-                                  showMessage("Added from cart");
-                                } else {
-                                  appProvider.removeFavouriteProduct(
-                                      widget.singleProduct);
-                                  showMessage("Removed from cart");
-                                }
-                              },
-                              child: Text(
-                                appProvider.getFavouriteProductList
-                                        .contains(widget.singleProduct)
-                                    ? "Remove to Cart"
-                                    : "Add to Cart",
-                                style: const TextStyle(
-                                  fontSize: 12.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
                           ],
                         ),
                         Text(

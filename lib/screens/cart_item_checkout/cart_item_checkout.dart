@@ -64,7 +64,7 @@ class _CheckoutState extends State<CartItemCheckout> {
                     width: 12.0,
                   ),
                   const Text(
-                    "Cash On Delivery",
+                    "Cash",
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
@@ -94,7 +94,7 @@ class _CheckoutState extends State<CartItemCheckout> {
                       });
                     },
                   ),
-                  const Icon(Icons.money),
+                  const Icon(Icons.payment_rounded),
                   const SizedBox(
                     width: 12.0,
                   ),
@@ -116,7 +116,7 @@ class _CheckoutState extends State<CartItemCheckout> {
               onPressed: () async {
                 bool value = await FirebaseFirestoreHelper.instance
                     .uploadOrderedProductFirebase(appProvider.getBuyProductList,
-                        context, groupValue == 1 ? "Cash On Delivery" : "Paid");
+                        context, groupValue == 1 ? "Cash" : "Paid");
 
                 appProvider.clearBuyProduct();
                 if (value) {

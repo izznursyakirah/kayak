@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kayak/constants/routes.dart';
+import 'package:kayak/screens/custom_bottom_bar/custom_bottom_bar.dart';
 import 'package:kayak/screens/home/home.dart';
 import 'package:kayak/widgets/primary_button/primary_button.dart';
 import 'package:kayak/widgets/top_titles/top_titles.dart';
@@ -103,15 +104,19 @@ class _SignUpState extends State<SignUp> {
             PrimaryButton(
               title: "Create an account",
               onPressed: () async {
-                 bool isVaildated = signUpValidation(email.text, password.text,name.text, phone.text);
+                bool isVaildated = signUpValidation(
+                    email.text, password.text, name.text, phone.text);
                 if (isVaildated) {
                   bool isLogined = await FirebaseAuthHelper.instance
                       .signUp(name.text, email.text, password.text, context);
                   if (isLogined) {
                     Routes.instance.pushAndRemoveUntil(
-                      widget: const Home(), context: context);
-              }
-            }
+                      widget: const Home(),
+                      context: context,
+                      predicate: (route) => false,
+                    );
+                  }
+                }
               },
             ),
             const SizedBox(
@@ -135,7 +140,7 @@ class _SignUpState extends State<SignUp> {
           ],
         ),
       ),
+      bottomNavigationBar: CustomBottomBar(), // Add this line
     );
   }
 }
-

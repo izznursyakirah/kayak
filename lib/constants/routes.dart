@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Routes {
   static Routes instance = Routes();
-  Future<dynamic> pushAndRemoveUntil( {required Widget widget, required BuildContext context}) {
+  Future<dynamic> pushAndRemoveUntil( {required Widget widget, required BuildContext context, required bool Function(dynamic route) predicate}) {
     return Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (ctx) => widget), (route) => false);
   }

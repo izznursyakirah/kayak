@@ -5,7 +5,7 @@ import 'package:kayak/models/product_model/product_model.dart';
 import 'package:kayak/provider/app_provider.dart';
 import 'package:kayak/screens/check_out/check_out.dart';
 import 'package:kayak/screens/cart_screen/cart_screen.dart';
-import 'package:kayak/screens/favourite_screen/favourite_screen.dart';
+import 'package:kayak/screens/favourite_screen/location_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/routes.dart';
@@ -47,34 +47,12 @@ class _ProductDetailsState extends State<ProductDetails> {
               height: 350,
               width: 350,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  widget.singleProduct.name,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    setState(() {
-                      widget.singleProduct.isFavourite =
-                          !widget.singleProduct.isFavourite;
-                    });
-                    if (widget.singleProduct.isFavourite) {
-                      appProvider.addFavouriteProduct(widget.singleProduct);
-                    } else {
-                      appProvider.removeFavouriteProduct(widget.singleProduct);
-                    }
-                  },
-                  icon: Icon(appProvider.getFavouriteProductList
-                          .contains(widget.singleProduct)
-                      ? Icons.favorite
-                      : Icons.favorite_border),
-                ),
-              ],
+            Text(
+              widget.singleProduct.name,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Text(widget.singleProduct.description),
             const SizedBox(
@@ -140,9 +118,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                   child: ElevatedButton(
                     onPressed: () {
                       ProductModel productModel =
-                        widget.singleProduct.copyWith(qty: qty);
-                      Routes.instance
-                          .push(widget:  Checkout(singleProduct: productModel), 
+                          widget.singleProduct.copyWith(qty: qty);
+                      Routes.instance.push(
+                          widget: Checkout(singleProduct: productModel),
                           context: context);
                     },
                     child: const Text("RENT NOW"),

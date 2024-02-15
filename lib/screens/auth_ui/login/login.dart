@@ -6,6 +6,7 @@ import 'package:kayak/constants/constants.dart';
 import 'package:kayak/constants/routes.dart';
 import 'package:kayak/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
 import 'package:kayak/screens/auth_ui/sign_up/sign_up.dart';
+import 'package:kayak/screens/custom_bottom_bar/custom_bottom_bar.dart';
 import 'package:kayak/screens/home/home.dart';
 import 'package:kayak/widgets/primary_button/primary_button.dart';
 import 'package:kayak/widgets/top_titles/top_titles.dart';
@@ -80,8 +81,11 @@ class _LoginState extends State<Login> {
                   bool isLogined = await FirebaseAuthHelper.instance
                       .login(email.text, password.text, context);
                   if (isLogined) {
-                    Routes.instance.pushAndRemoveUntil(
-                      widget: const Home(), context: context);
+                            Routes.instance.pushAndRemoveUntil(
+  widget: const Home(), 
+  context: context, 
+  predicate: (route) => false,
+);
                   }
                 }
               },
@@ -107,6 +111,7 @@ class _LoginState extends State<Login> {
           ],
         ),
       ),
+   
     );
   }
 }

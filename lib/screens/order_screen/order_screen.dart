@@ -34,6 +34,13 @@ class OrderScreen extends StatelessWidget {
               child: Text("No Booking Found"),
             );
           }
+
+          for (var order in snapshot.data!) {
+            print('Product Name: ${order.products[0].name}');
+            print('Quantity: ${order.products[0].qty}');
+            print('Price: ${order.products[0].price}');
+          }
+
           return ListView.builder(
             itemCount: snapshot.data!.length,
             padding: const EdgeInsets.all(12.0),
