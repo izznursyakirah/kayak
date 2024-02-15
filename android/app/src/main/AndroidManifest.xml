@@ -33,5 +33,8 @@ package ="com.example.kayak">
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+            
+            <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyDpO7nK50RWIGf1oxUGSAQk9yuhwoeRQ4o"/>
     </application>
 </manifest>
