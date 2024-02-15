@@ -81,11 +81,11 @@ class _LoginState extends State<Login> {
                   bool isLogined = await FirebaseAuthHelper.instance
                       .login(email.text, password.text, context);
                   if (isLogined) {
-                            Routes.instance.pushAndRemoveUntil(
-  widget: const Home(), 
-  context: context, 
-  predicate: (route) => false,
-);
+                    Routes.instance.pushAndRemoveUntil(
+                      widget: const CustomBottomBar(),
+                      context: context,
+                      predicate: (route) => false,
+                    );
                   }
                 }
               },
@@ -100,7 +100,8 @@ class _LoginState extends State<Login> {
             Center(
               child: CupertinoButton(
                 onPressed: () {
-                  Routes.instance.push(widget: const SignUp(), context: context);
+                  Routes.instance
+                      .push(widget: const SignUp(), context: context);
                 },
                 child: Text(
                   "Create an account",
@@ -111,7 +112,6 @@ class _LoginState extends State<Login> {
           ],
         ),
       ),
-   
     );
   }
 }
