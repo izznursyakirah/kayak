@@ -123,7 +123,14 @@ class _ProductDetailsState extends State<ProductDetails> {
                           widget: Checkout(singleProduct: productModel),
                           context: context);
                     },
-                    child: const Text("RENT NOW"),
+                    child: Text(
+                      "RENT NOW",
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors
+                            .white, // Change this value to make the text smaller
+                      ),
+                    ),
                   ),
                 ),
               ],

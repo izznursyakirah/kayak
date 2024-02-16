@@ -75,14 +75,9 @@ class _HomeState extends State<Home> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const TopTitles(subtitle: "", title: "Kayak Booking"),
-                        TextFormField(
-                          decoration: const InputDecoration(
-                              hintText: "Search........."),
-                        ),
-                        const SizedBox(
-                          height: 24.0,
-                        ),
+                        const TopTitles(
+                            subtitle: "",
+                            title: "Kayak Booking with Tracking System"),
                         const Text(
                           "Categories",
                           style: TextStyle(
@@ -176,8 +171,8 @@ class _HomeState extends State<Home> {
                                     children: [
                                       Image.network(
                                         singleProduct.image,
-                                        height: 100,
-                                        width: 100,
+                                        height: 80,
+                                        width: 80,
                                       ),
                                       const SizedBox(
                                         height: 12.0,
@@ -185,7 +180,7 @@ class _HomeState extends State<Home> {
                                       Text(
                                         singleProduct.name,
                                         style: const TextStyle(
-                                          fontSize: 18.0,
+                                          fontSize: 15.0,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),

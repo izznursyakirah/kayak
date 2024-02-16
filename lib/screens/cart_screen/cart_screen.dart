@@ -35,15 +35,17 @@ class _CartScreenState extends State<CartScreen> {
                   const Text(
                     "Total",
                     style: TextStyle(
-                      fontSize: 18.0,
+                      fontSize: 19.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
-                    "\RM${appProvider.totalPrice().toString()}",
-                    style: const TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
+                  Flexible(
+                    child: Text(
+                      "\RM${appProvider.totalPrice().toString()}",
+                      style: const TextStyle(
+                        fontSize: 19.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
